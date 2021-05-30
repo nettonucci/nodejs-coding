@@ -26,8 +26,37 @@ module.exports = {
    
   },
 
+  async showByName(req, res) {
+    const { name } = req.params;
+
+    const respVerify = await knex('exames').where('name', 'like', `%${name}%`)
+
+    if(respVerify.length > 0) {
+        const resultsAssoc = await knex("rel_lab_exam")
+        .join('laboratorios', 'rel_lab_exam.laboratorio_id', '=', 'laboratorios.id')
+        .select("laboratorios.id", "laboratorios.name", 'laboratorios.address', 'laboratorios.status')
+        .where({"rel_lab_exam.exame_id": respVerify[0].id })
+    
+        respVerify[0].laboratorios = resultsAssoc
+    
+        return res.status(201).json(respVerify)
+    } else {
+        return res.status(404).json({ Successes: false, Message: `Exam not found` });
+    }
+
+    
+  
+   
+  },
+
   async create(req, res) {
     const { name, type } = req.body;
+
+    const respVerify = await knex('exames').where('name', 'like', `%${name}%`)
+
+    if (respVerify.length > 0) {
+        return res.status(400).json({ Successes: false, Message: `An exam with this name already exists` });
+    }
 
     const types = [
         'analise', 'clinica', 'imagem'
@@ -56,6 +85,13 @@ module.exports = {
     var successes = []
 
     for (var i=0; i < lote.length; i++) {
+
+        const respVerify = await knex('exames').where('name', 'like', `%${lote[i].name}%`)
+
+        if (respVerify.length > 0) {
+            errors.push({exam_name: lote[i].name, Successes: false, Message: `An exam with this name already exists` });
+            continue
+        }
         const types = [
             'analise', 'clinica', 'imagem'
         ]
