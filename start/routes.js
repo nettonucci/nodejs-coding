@@ -19,8 +19,11 @@ const AssociacaoController = require('../app/Controllers/Http/AssociacaoControll
     routes.get('/exames/listActive', ExameController.list);
     routes.get('/exames/show/:id', ExameController.show);
     routes.post('/exames/create', ExameController.create);
+    routes.post('/exames/createInBatch', ExameController.createInBatch);
     routes.put('/exames/update/:id', ExameController.update);
+    routes.put('/exames/updateInBatch', ExameController.updateInBatch);
     routes.delete('/exames/delete/:id', ExameController.delete);
+    routes.delete('/exames/deleteInBatch', ExameController.deleteInBatch);
 
     routes.post('/associacao/create', AssociacaoController.create)
     routes.delete('/associacao/delete/:id', AssociacaoController.delete);
