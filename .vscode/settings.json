@@ -1,3 +1,11 @@
 {
-    "explorer.compactFolders": false
+    "explorer.compactFolders": false,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Desafio",
+            "database": "${workspaceFolder:nodejs-coding}/database/mydb.sqlite"
+        }
+    ]
 }
