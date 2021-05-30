@@ -40,7 +40,7 @@ module.exports = {
             type
           });
     
-        return res.status(201).json({ Successes: "Exam successfully added" });
+        return res.status(201).json({ Successes: true, Message: "Exam successfully added" });
     } else {
         return res.status(400).json({ Successes: false, Message: `Only types allowed: ${types}` });
     }
@@ -77,13 +77,13 @@ module.exports = {
             id
           });
     
-        return res.status(201).json({ Successes: "Exam successfully updated" });
+        return res.status(201).json({ Successes: true, Message: "Exam successfully updated" });
       } else {
         return res.status(404).json({ Successes: false, Message: `Exam not found` });
       }
 
     }else {
-        return res.status(201).json({ Successes: false, Message: `Only types allowed: ${types}` });
+        return res.status(400).json({ Successes: false, Message: `Only types allowed: ${types}` });
     }
 
     
@@ -103,7 +103,7 @@ module.exports = {
             id
           });
     
-        return res.status(201).json({ Successes: "Exam successfully updated" });
+        return res.status(201).json({ Successes: true, Message: "Exam successfully updated" });
       } else {
         return res.status(404).json({ Successes: false, Message: `Exam not found` });
       }
@@ -126,7 +126,7 @@ module.exports = {
             id
         });
 
-        return res.status(201).json({ Successes: "Exam successfully deleted" });
+        return res.status(201).json({ Successes: true, Message: "Exam successfully deleted" });
       } else {
         return res.status(404).json({ Successes: false, Message: `Exam not found` });
       }
