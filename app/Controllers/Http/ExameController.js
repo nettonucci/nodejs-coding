@@ -1,4 +1,5 @@
 const knex = require("../../../database");
+const { createInBatch, updateInBatch } = require("./LaboratorioController");
 
 module.exports = {
   async list(req, res) {
@@ -43,6 +44,40 @@ module.exports = {
         return res.status(201).json({ Successes: true, Message: "Exam successfully added" });
     } else {
         return res.status(400).json({ Successes: false, Message: `Only types allowed: ${types}` });
+    }
+
+    
+  },
+
+  async createInBatch(req, res) {
+    const { lote } = req.body;
+
+    var errors =  []
+    var successes = []
+
+    for (var i=0; i < lote.length; i++) {
+        const types = [
+            'analise', 'clinica', 'imagem'
+        ]
+    
+        var resp = types.includes(lote[i].type)
+    
+        if (resp) {
+            await knex("exames").insert(lote[i]);
+        
+           
+          successes.push({exam_name: lote[i].name, Successes: true, Message: "Exam successfully added" })
+        } else {
+          errors.push({exam_name: lote[i].name, Successes: false, Message: `Only types allowed: ${types}`})
+        }
+
+       
+    }
+
+    if(successes.length === 0) {
+        return res.status(400).json({errors, successes})
+    } else {
+        return res.status(201).json({successes, errors})
     }
 
     
@@ -111,6 +146,73 @@ module.exports = {
     
   },
 
+  async updateInBatch(req, res) {
+    const { lote } = req.body;
+
+    var errors =  []
+    var successes = []
+
+    for (var i=0; i < lote.length; i++) {
+
+    if (lote[i].type) {
+        
+        const types = [
+            'analise', 'clinica', 'imagem'
+        ]
+    
+        var resp = types.includes(lote[i].type)
+
+        if (resp) {
+
+    var results = await knex("exames")
+    .where({
+        id: lote[i].id
+      }).select("id")
+
+
+      if(results.length > 0) {
+        await knex("exames").update(lote[i]).where({
+            id: lote[i].id
+          });
+    
+        successes.push({exam_id: lote[i].id, Successes: true, Message: "Exam successfully updated" })
+      } else {
+        errors.push({exam_id: lote[i].id, Successes: false, Message: `Exam not found`})
+      }
+
+    } else {
+        errors.push({exam_id: lote[i].id, Successes: false, Message: `Only types allowed: ${types}`})
+    }
+
+    
+    } else {
+        var results = await knex("exames")
+    .where({
+        id: lote[i].id
+      }).select("id")
+
+
+      if(results.length > 0) {
+        await knex("exames").update(lote[i]).where({
+            id: lote[i].id
+          });
+    
+          successes.push({exam_id: lote[i].id, Successes: true, Message: "Exam successfully updated" })
+        } else {
+          errors.push({exam_id: lote[i].id, Successes: false, Message: `Exam not found`})
+        }
+    }
+
+    }
+
+    if(successes.length === 0) {
+        return res.status(400).json({errors, successes})
+    } else {
+        return res.status(201).json({successes, errors})
+    }
+    
+  },
+
   async delete(req, res) {
     const { id } = req.params;
     
@@ -130,5 +232,38 @@ module.exports = {
       } else {
         return res.status(404).json({ Successes: false, Message: `Exam not found` });
       }
+  },
+
+  async deleteInBatch(req, res) {
+    const { lote } = req.body;
+
+    var errors =  []
+    var successes = []
+
+    for (var i=0; i < lote.length; i++) {
+        var results = await knex("exames")
+        .where({
+            id: lote[i].id
+          }).select("id")
+    
+    
+          if(results.length > 0) {
+    
+            await knex("exames").del().where({
+                id: lote[i].id
+            });
+    
+            successes.push({exam_id: lote[i].id, Successes: true, Message: "Exam successfully deleted" })
+        } else {
+            errors.push({exam_id: lote[i].id, Successes: false, Message: "Exam not found"})
+        }
+    }
+
+    if(successes.length === 0) {
+        return res.status(400).json({errors, successes})
+    } else {
+        return res.status(201).json({successes, errors})
+    }
+    
   }
 };
