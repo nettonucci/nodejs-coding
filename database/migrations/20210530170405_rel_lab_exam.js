@@ -6,7 +6,7 @@ exports.up = knex =>
     table
       .foreign("laboratorio_id")
       .references("id")
-      .inTable("laboratorio")
+      .inTable("laboratorios")
       .onDelete("SET NULL")
       .onUpdate("CASCADE");
     table
