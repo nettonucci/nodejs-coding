@@ -10,8 +10,11 @@ const AssociacaoController = require('../app/Controllers/Http/AssociacaoControll
     routes.get('/laboratorios/listActive', LaboratorioController.list);
     routes.get('/laboratorios/show/:id', LaboratorioController.show);
     routes.post('/laboratorios/create', LaboratorioController.create);
+    routes.post('/laboratorios/createInBatch', LaboratorioController.createInBatch);
     routes.put('/laboratorios/update/:id', LaboratorioController.update);
+    routes.put('/laboratorios/updateInBatch', LaboratorioController.updateInBatch);
     routes.delete('/laboratorios/delete/:id', LaboratorioController.delete);
+    routes.delete('/laboratorios/deleteInBatch', LaboratorioController.deleteInBatch);
 
     routes.get('/exames/listActive', ExameController.list);
     routes.get('/exames/show/:id', ExameController.show);
