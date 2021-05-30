@@ -3,6 +3,7 @@ const routes = express.Router();
 
 const LaboratorioController = require('../app/Controllers/Http/LaboratorioController');
 const ExameController = require('../app/Controllers/Http/ExameController');
+const AssociacaoController = require('../app/Controllers/Http/AssociacaoController');
 
 
 
@@ -17,6 +18,9 @@ const ExameController = require('../app/Controllers/Http/ExameController');
     routes.post('/exames/create', ExameController.create);
     routes.put('/exames/update/:id', ExameController.update);
     routes.delete('/exames/delete/:id', ExameController.delete);
+
+    routes.post('/associacao/create', AssociacaoController.create)
+    routes.delete('/associacao/delete/:id', AssociacaoController.delete);
 
 
 
