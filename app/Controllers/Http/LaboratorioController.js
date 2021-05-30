@@ -16,8 +16,12 @@ module.exports = {
         id: id
       }).select("id", "name", 'address', 'status')
   
-  
-    return res.json(results);
+      if(results.length > 0) {
+        return res.status(201).json(results);
+      } else {
+        return res.status(404).json({ Successes: false, Message: `Laboratory not found` });
+      }
+    
   },
 
   async create(req, res) {
@@ -28,7 +32,7 @@ module.exports = {
         address
       });
 
-    return res.status(201).json({ Successes: "Laboratory successfully added" });
+    return res.status(201).json({ Successes: true, Message: "Laboratory successfully added" });
   },
 
   async update(req, res) {
@@ -50,9 +54,9 @@ module.exports = {
             id
           });
     
-        return res.status(201).json({ Successes: "Laboratory successfully updated" });
+        return res.status(201).json({ Successes: true, Message: "Laboratory successfully updated"});
       } else {
-        return res.status(404).json({ Error: "Laboratory not found" });
+        return res.status(404).json({ Successes: false, Message: "Laboratory not found" });
       }
 
     
@@ -73,9 +77,9 @@ module.exports = {
             id
         });
 
-        return res.status(201).json({ Successes: "Laboratory successfully deleted" });
+        return res.status(201).json({ Successes: true, Message: "Laboratory successfully deleted"});
       } else {
-        return res.status(404).json({ Error: "Laboratory not found" });
+        return res.status(404).json({ Successes: false, Message: "Laboratory not found" });
       }
   }
 };
