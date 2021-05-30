@@ -22,8 +22,6 @@ module.exports = {
 
     results[0].exames = resultsAssoc
 
-
-  console.log(results)
   
       if(results.length > 0) {
         return res.status(201).json(results);
@@ -47,8 +45,6 @@ module.exports = {
 
   async createInBatch(req, res) {
     const { lote } = req.body;
-
-    console.log()
 
     for (var i=0; i < lote.length; i++) {
         await knex("laboratorios").insert({
