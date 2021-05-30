@@ -18,6 +18,7 @@
   "homepage": "https://github.com/nettonucci/nodejs-coding#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-group-routes": "^1.1.0",
     "knex": "^0.95.6",
     "moment": "^2.29.1",
     "sqlite3": "^5.0.2",
