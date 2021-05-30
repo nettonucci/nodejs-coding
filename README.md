@@ -13,9 +13,9 @@ Projeto criando em ![NodeJS](https://img.shields.io/badge/-Node.JS-339933?style=
 ![SQLITE](https://img.shields.io/badge/-SQLite-000000?style=flat&logo=sqlite&logoColor=fff)
 ![VS Code](http://img.shields.io/badge/-VS%20Code-007ACC?style=flat&logo=visual-studio-code)
 
-## Building
+# Building
 
-# Opção 1
+## Opção 1
 
 Você precisa do [Node.js](https://nodejs.org) instalado no seu computador para construir este servidor.
 
@@ -25,8 +25,8 @@ $ cd nodejs-coding
 $ yarn install
 $ yarn dev
 ```
-# Opção 2
-# Diferenciais 1 (Configurar a aplicação para rodar em um container)
+## Opção 2
+### Diferenciais 1 (Configurar a aplicação para rodar em um container)
 
 Você precisa do [Docker](https://www.docker.com/) instalado no seu computador para construir este servidor.
 
@@ -35,13 +35,13 @@ git clone https://github.com/nettonucci/nodejs-coding.git
 $ cd nodejs-coding
 $ docker-compose up
 ```
-## Utilização sem instalação/building
+# Utilização sem instalação/building
 
-# Diferenciais 2 (Publicação do ambiente em um serviço cloud de hospedagens (Heroku))
+### Diferenciais 2 (Publicação do ambiente em um serviço cloud de hospedagens (Heroku))
 
 Para utilizar os endpoints da API sem a instalação/building na maquina, um servidor foi alocado no Heroku, esta disponivel [Aqui](https://wa-challenge.herokuapp.com/).
 
-# Diferenciais 3 (Documentação da API)
+### Diferenciais 3 (Documentação da API)
 
 Você precisa do [Insomnia](https://insomnia.rest/download) instalado no seu computador para realizar os testes no servidor.
 
