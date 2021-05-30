@@ -11,10 +11,19 @@ module.exports = {
   async show(req, res) {
     const { id } = req.params;
 
-    const results = await knex("laboratorios")
-    .where({
-        id: id
-      }).select("id", "name", 'address', 'status')
+    const results = await knex.select("id", "name", 'address', 'status').from("laboratorios").where({
+        id
+      });
+
+    const resultsAssoc = await knex("rel_lab_exam")
+    .join('exames', 'rel_lab_exam.exame_id', '=', 'exames.id')
+    .select("exames.id", "exames.name", 'exames.type', 'exames.status')
+    .where({"rel_lab_exam.laboratorio_id": id })
+
+    results[0].exames = resultsAssoc
+
+
+  console.log(results)
   
       if(results.length > 0) {
         return res.status(201).json(results);
