@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "knex": "^0.95.6",
     "moment": "^2.29.1",
+    "sqlite3": "^5.0.2",
     "uuidv4": "^6.2.8"
   },
   "devDependencies": {
